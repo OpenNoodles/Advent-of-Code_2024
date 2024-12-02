@@ -2,3 +2,4 @@
 **/.gitkeep
 **/bin/*
 !**/bin/data
+.vscode/
