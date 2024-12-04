@@ -31,7 +31,7 @@ void toVector(std::vector<DataType>& a, std::vector<DataType>& b) {
 }
 
 template <class DataType>
-void toVectorOfInputs(std::vector<std::vector<DataType>>& vec) {
+void toMatrix(std::vector<std::vector<DataType>>& vec) {
     auto inputFile = openFile();
     std::string line;
     while (std::getline(inputFile, line)) {

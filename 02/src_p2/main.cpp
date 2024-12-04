@@ -13,7 +13,7 @@ bool compareDecreasing(int a, int b);
 int main() {
     std::vector<std::vector<int>> data;
     data.reserve(1000);
-    ReadData::toVectorOfInputs<int>(data);
+    ReadData::toMatrix<int>(data);
     processReports(data);
     // RESULT: Your puzzle answer was 544
     return 0;
