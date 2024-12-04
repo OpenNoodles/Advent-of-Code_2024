@@ -41,8 +41,11 @@ void toMatrix(std::vector<std::vector<DataType>>& vec) {
         while (stream >> value) {
             row.push_back(value);
         }
-        vec.push_back(row);
+        if (!row.empty()) {
+            vec.push_back(row);
+        }
     }
+    vec.shrink_to_fit();
     inputFile.close();
 }
 
