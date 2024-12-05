@@ -30,6 +30,50 @@ void toVector(std::vector<DataType>& a, std::vector<DataType>& b) {
     inputFile.close();
 }
 
+using Section = std::vector<std::string>;
+using LSections = std::vector<Section>;
+void byLineInSections(LSections& sections, const std::string& delimiter = "") {
+    auto inputFile = openFile();
+    sections.push_back(Section());
+    std::string line;
+    while (std::getline(inputFile, line)) {
+        if (line == delimiter) {
+            sections.push_back(Section());
+            continue;
+        }        
+        sections.back().push_back(line);
+    }
+    inputFile.close();
+    for (auto& section : sections) {
+        section.shrink_to_fit();
+    }
+    sections.shrink_to_fit();
+}
+
+using Chunk = std::string;
+using ChSections = std::vector<Chunk>;
+void byChunksInSections(ChSections& chunkSections, const std::string& delimiter = "") {
+    auto inputFile = openFile();
+    std::stringstream buffer;
+    buffer << inputFile.rdbuf();
+    inputFile.close();
+    if (delimiter.empty()) {
+        chunkSections.push_back(buffer.str());
+        return;
+    }
+    const std::string& bigChunk = buffer.str();
+    size_t tail = 0;
+    size_t index = bigChunk.find(delimiter);
+    const size_t limit = bigChunk.size();
+    while (index < limit) {
+        chunkSections.push_back(bigChunk.substr(tail, index - tail));
+        tail = index;
+        index = bigChunk.find(delimiter, index + 1);
+    }
+    chunkSections.push_back(bigChunk.substr(tail));
+    chunkSections.shrink_to_fit();
+}
+
 template <class DataType>
 void toMatrix(std::vector<std::vector<DataType>>& vec) {
     auto inputFile = openFile();
