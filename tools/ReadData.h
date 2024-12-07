@@ -31,6 +31,21 @@ void toVector(std::vector<DataType>& a, std::vector<DataType>& b) {
 }
 
 using Section = std::vector<std::string>;
+void byLine(Section& section) {
+    auto inputFile = openFile();
+    std::string line;
+    while (std::getline(inputFile, line)) {
+        if (line.empty()) {
+            continue;
+        }
+        section.push_back(line);
+    }
+    inputFile.close();
+    section.shrink_to_fit();
+}
+
+
+using Section = std::vector<std::string>;
 using LSections = std::vector<Section>;
 void byLineInSections(LSections& sections, const std::string& delimiter = "") {
     auto inputFile = openFile();

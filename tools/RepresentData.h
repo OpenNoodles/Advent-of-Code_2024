@@ -37,9 +37,21 @@ void toVector(const Section& section, std::vector<std::pair<DataType, DataType>>
 
 
 template <class DataType>
-void toVector(const Section& section, std::vector<std::vector<DataType>>& vec, const std::string& delimiter = " ") {
+void toVector(const Section& section, std::vector<std::vector<DataType>>& vec, const std::string& delimiter = "") {
     for (const auto& line : section) {
         vec.push_back(std::vector<DataType>());
+
+        if (delimiter == "") {
+            for (const auto character : line) {
+                std::string tmp = {character};
+                std::istringstream stream(tmp);
+                DataType value;
+                stream >> value;
+                vec.back().push_back(value);
+            }
+            continue;
+        }
+
         if (delimiter == " ") {
             std::istringstream stream(line);
             DataType value;
