@@ -28,14 +28,18 @@
 &emsp;• Second half, second attempt: &emsp; `03 : 07 : 14` &emsp; failed attempt :heavy_multiplication_x: \
 &emsp;• Second half, third attempt: &emsp; `05 : 09 : 51` &emsp; failed attempt :heavy_multiplication_x:
 
-**Day 07** :comet::comet: `00 : 00 : 00` \
-&emsp;• First half: &emsp; `00 : 00 : 00` \
-&emsp;• Second half: &emsp; `00 : 00 : 00`
+**Day 07** :star::star: `01 : 19 : 15` \
+&emsp;• Read data: &emsp; `00 : 18 : 41` \
+&emsp;• First half: &emsp; `00 : 44 : 42` &emsp; lazy solution :seedling: \
+&emsp;• Second half: &emsp; `00 : 15 : 52` &emsp; lazy solution :seedling: \
 
 **Day 08** :comet::comet: `00 : 00 : 00` \
 &emsp;• First half: &emsp; `00 : 00 : 00` \
 &emsp;• Second half: &emsp; `00 : 00 : 00`
-:rock:
+
+**Day 09** :comet::comet: `00 : 00 : 00` \
+&emsp;• First half: &emsp; `00 : 00 : 00` \
+&emsp;• Second half: &emsp; `00 : 00 : 00`
 
 ---
 todo - :comet: \
