@@ -33,9 +33,9 @@
 &emsp;• First half: &emsp; `00 : 44 : 42` &emsp; lazy solution :seedling: \
 &emsp;• Second half: &emsp; `00 : 15 : 52` &emsp; lazy solution :seedling:
 
-**Day 08** :comet::comet: `00 : 00 : 00` \
-&emsp;• First half: &emsp; `00 : 00 : 00` \
-&emsp;• Second half: &emsp; `00 : 00 : 00`
+**Day 08** :star::star: `01 : 52 : 42` \
+&emsp;• First half: &emsp; `01 : 31 : 42` &emsp; lazy solution :seedling: \
+&emsp;• Second half: &emsp; `00 : 21 : 00` &emsp; lazy solution :seedling:
 
 **Day 09** :comet::comet: `00 : 00 : 00` \
 &emsp;• First half: &emsp; `00 : 00 : 00` \
