@@ -31,7 +31,7 @@
 **Day 07** :star::star: `01 : 19 : 15` \
 &emsp;• Read data: &emsp; `00 : 18 : 41` \
 &emsp;• First half: &emsp; `00 : 44 : 42` &emsp; lazy solution :seedling: \
-&emsp;• Second half: &emsp; `00 : 15 : 52` &emsp; lazy solution :seedling: \
+&emsp;• Second half: &emsp; `00 : 15 : 52` &emsp; lazy solution :seedling:
 
 **Day 08** :comet::comet: `00 : 00 : 00` \
 &emsp;• First half: &emsp; `00 : 00 : 00` \
