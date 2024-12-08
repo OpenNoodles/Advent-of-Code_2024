@@ -1,4 +1,4 @@
-# Advent of Code 2024 :sparkles:
+# Advent of Code 2024 :sparkles: <sub>[Personal Aoc01, 1-25.12.2024]</sub> 
 
 **Day 01** :star::star: `02 : 59 : 09` \
 &emsp;• First half: &emsp; `02 : 31 : 48` &emsp; prep time + lazy solution :seedling: \
