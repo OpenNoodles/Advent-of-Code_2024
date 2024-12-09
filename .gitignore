@@ -2,5 +2,6 @@
 **/.build/
 **/.gitkeep
 **/bin/*
-!**/bin/data
+!**/bin/buildandrun
+!**/bin/rebuild
 .vscode/

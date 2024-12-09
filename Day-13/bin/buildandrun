@@ -1,0 +1,33 @@
+#!/bin/bash
+
+clear
+
+echo "--- BUILD AND RUN ---"
+echo "  - running 'clear'"
+
+#CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+#echo "  - moving to: '$CURRENT_DIR/'"
+#cd "$CURRENT_DIR" || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
+#if [ ! -d ".build" ]; then
+#    echo "  - missing catalog '.build', creating new catalog"
+#    mkdir .build || { echo "--- can't create catalog, --- BUILD AND RUN ---abort"; echo ""; exit 1; }
+#fi
+#cd .build || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
+#
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+echo "  - moving to: '$CURRENT_DIR/..'"
+cd "$CURRENT_DIR/.." || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
+if [ ! -d ".build" ]; then
+    echo "  - missing catalog '.build', creating new catalog..."
+    mkdir .build || { echo "--- can't create catalog, --- BUILD AND RUN ---abort"; echo ""; exit 1; }
+fi
+cd .build || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
+
+echo "  - running make:"
+make || { echo "--- BUILD AND RUN --- abort"; exit 1; }
+
+EXECUTABLE_NAME=$(pwd | awk -F'/' '{print "Aoc-" $(NF-1)}')
+echo "  - running executable: '$EXECUTABLE_NAME'"
+echo ""
+../bin/$EXECUTABLE_NAME
+
