@@ -14,6 +14,14 @@ set(THIS_PROJECT_COMPILE_OPTIONS
     -pedantic
     -Wconversion 
     -O3
+    -Wshadow
+    -Wnon-virtual-dtor
+    -Wold-style-cast    
+    -Woverloaded-virtual 
+    -Wzero-as-null-pointer-constant
+    -fPIE 
+    -fstack-protector-all 
+    -fno-rtti
 )
 set(THIS_PROJECT_COMPILE_FEATURES
     cxx_std_17
@@ -22,13 +30,13 @@ set(THIS_PROJECT_INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}/../
 )
 
-project(AOC_09)
+project(Aoc-Day-09)
 file(GLOB_RECURSE TARGET_SOURCES_PART_ONE "${CMAKE_CURRENT_SOURCE_DIR}/srcP1/*.cpp")
 file(GLOB_RECURSE TARGET_SOURCES_PART_TWO "${CMAKE_CURRENT_SOURCE_DIR}/srcP2/*.cpp")
 file(GLOB_RECURSE MAIN_TARGET_TOOLS "${CMAKE_CURRENT_SOURCE_DIR}/../tools/*.cpp")
 
-set(TARGET_NAME_PART_ONE ${PROJECT_NAME}_P1)
-add_executable(${TARGET_NAME_PART_ONE}
+set(TARGET_NAME_PART_ONE ${PROJECT_NAME}-P1)
+add_library(${TARGET_NAME_PART_ONE} STATIC
     ${TARGET_SOURCES_PART_ONE}
     ${MAIN_TARGET_TOOLS}
 )
@@ -36,8 +44,8 @@ target_compile_options(${TARGET_NAME_PART_ONE} PRIVATE ${THIS_PROJECT_COMPILE_OP
 target_compile_features(${TARGET_NAME_PART_ONE} PRIVATE ${THIS_PROJECT_COMPILE_FEATURES})
 target_include_directories(${TARGET_NAME_PART_ONE} PRIVATE ${THIS_PROJECT_INCLUDE_DIRECTORIES})
 
-set(TARGET_NAME_PART_TWO ${PROJECT_NAME}_P2)
-add_executable(${TARGET_NAME_PART_TWO}
+set(TARGET_NAME_PART_TWO ${PROJECT_NAME}-P2)
+add_library(${TARGET_NAME_PART_TWO} STATIC
     ${TARGET_SOURCES_PART_TWO}
     ${MAIN_TARGET_TOOLS}
 )
@@ -45,3 +53,11 @@ target_compile_options(${TARGET_NAME_PART_TWO} PRIVATE ${THIS_PROJECT_COMPILE_OP
 target_compile_features(${TARGET_NAME_PART_TWO} PRIVATE ${THIS_PROJECT_COMPILE_FEATURES})
 target_include_directories(${TARGET_NAME_PART_TWO} PRIVATE ${THIS_PROJECT_INCLUDE_DIRECTORIES})
 
+add_executable(${PROJECT_NAME}
+    main.cpp
+    ${MAIN_TARGET_TOOLS}
+)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}-P1 ${PROJECT_NAME}-P2)
+target_compile_options(${PROJECT_NAME} PRIVATE ${THIS_PROJECT_COMPILE_OPTIONS})
+target_compile_features(${PROJECT_NAME} PRIVATE ${THIS_PROJECT_COMPILE_FEATURES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${THIS_PROJECT_INCLUDE_DIRECTORIES})
