@@ -7,18 +7,7 @@
 namespace SecondHalfOperations {
 
 size_t toSize_t(const char value) {
-	// if (value <= '9') {
-	// 	std::cerr << "    >" <<  value << "<  \n";
-	// }
-	// assert(value >= '0');
-	// assert('3' <= '9');
-	// assert(static_cast<char>(value) <= static_cast<char>('9'));
     return static_cast<size_t>(value) - static_cast<size_t>('0');
-	// Aoc-Day-09: /home/kacu/Desktop/Advent of Code/Advent-of-Code_2024/Day-09---Disk Fragmenter/srcP2/SecondHalfOperations.cpp:17: 
-	
-	// size_t SecondHalfOperations::toSize_t(char): 
-	
-	// Assertion `static_cast<char>(value) <= static_cast<char>('9')' failed.
 }
 
 void appendToLeftSide(std::vector<int>& formatedData, const size_t quantity, const int value) {
@@ -40,10 +29,6 @@ size_t fromNegativeNumber(const char value) {
     return static_cast<size_t>(value) - static_cast<size_t>('a');
 	// return toSize_t(value - 'a');
 }
-// char toNegativeNumber(const size_t value) {
-
-// }
-
 
 void decompressData(std::vector<int>& formatedData, const std::string& data) {
     int allocateValueLeft = 0;
@@ -61,8 +46,63 @@ void decompressData(std::vector<int>& formatedData, const std::string& data) {
 	std::cerr << formatedData.size();
 }
 
+void decompressData(std::list<DataBlock>& formatedData, const std::string& data) {
+    int allocateValue = 0;
+	for (size_t i = 0; i < data.size(); ++i) {
+		const size_t sizeOfDataBlock = toSize_t(data.at(i));
+		assert(sizeOfDataBlock <= 9);
+        if (i % 2 == 0) {
+			formatedData.push_back({sizeOfDataBlock, allocateValue});
+			++allocateValue;
+        }
+        else {
+			formatedData.push_back({sizeOfDataBlock, -1});
+		}
+	}
+}
 
+size_t calculateCheckSum(const std::list<DataBlock>& formatedData) {
+    size_t count = 0;
+	size_t index = 0;
+	for (const auto& dataBlock : formatedData) {
+		for (size_t i = 0; i < dataBlock.quantity(); ++i) {
+			if (!dataBlock.isEmpty()) {
+        		count += index * dataBlock.fileId();
+			}
+			++index;
+		}
+    }
+    return count;
+}
 
+void formatData(std::list<DataBlock>& formatedData) {
+    for (auto rit = std::rbegin(formatedData); rit != std::rend(formatedData); ++rit) {
+		if (rit->isEmpty()) {
+			continue;
+		}
+    	for (auto it = std::begin(formatedData); it != rit.base(); ++it) {
+			if (!it->isEmpty()) {
+				continue;
+			}
+			if (it->quantity() == rit->quantity()) {
+				// swap
+				it->setFileId(rit->fileId());
+				rit->clear();
+				break;
+			}
+			if (it->quantity() > rit->quantity()) {
+				// split
+				const size_t remainingSizeOfLeftBlock = rit->quantity();
+				const size_t sizeOfNewRightBlock = it->quantity() - rit->quantity();
+				it->setQuantity(remainingSizeOfLeftBlock);
+				it->setFileId(rit->fileId());
+				rit->clear();
+				formatedData.insert(std::next(it), DataBlock(sizeOfNewRightBlock));
+				break;
+			}
+		}
+    }
+}
 
 void formatData(std::vector<int>& formatedData, std::string data) {
     size_t i = 0;
@@ -332,16 +372,7 @@ void formatData3(std::vector<int>& formatedData, std::string data) {
 				aheadWalker -= 2;
 				--walkerValue;				
 			}
-			// std::cerr << availableSpace << "\n";
-			// for (const auto& value : formatedData) {
-			// 	std::cerr << value << " ";
-			// }
-			// std::cerr << "\n";
 			appendToLeftSide(formatedData, availableSpace, 0);
-			// for (const auto& value : formatedData) {
-			// 	std::cerr << value << " ";
-			// }
-			// std::cerr << "\n";
         }
     }
 }

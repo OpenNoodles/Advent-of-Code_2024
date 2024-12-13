@@ -1,6 +1,7 @@
 #include "tools/ReadData.h"
 #include "srcP1/FirstHalfOperations.h"
 #include "srcP2/SecondHalfOperations.h"
+#include "srcP2/DataBlock.h"
 
 void firstHalf(const std::string& data);
 void secondHalf(const std::string& data);
@@ -25,23 +26,42 @@ void firstHalf(const std::string& data) {
  }
 
  void secondHalf(const std::string& data) {
-    std::vector<int> formatedData;
-    formatedData.reserve(data.size());
-    SecondHalfOperations::formatData(formatedData, data);
-    // SecondHalfOperations::decompressData(formatedData, data);
-    
-    std::cerr << "\n";
+    std::list<DataBlock> formatedData;
+    SecondHalfOperations::decompressData(formatedData, data);
 
-    for (const auto& value : formatedData) {
-        std::cerr << value << " ";
-    } 
+	// for (const auto& dataBlock : formatedData) {
+	// 	for (size_t i = 0; i < dataBlock.quantity(); ++i) {
+    //     	std::cerr << dataBlock.fileId() << " ";
+	// 	}
+    // }
+    // std::cerr << "\n";
+
+    SecondHalfOperations::formatData(formatedData);
+
+	// for (const auto& dataBlock : formatedData) {
+	// 	for (size_t i = 0; i < dataBlock.quantity(); ++i) {
+    //     	std::cerr << dataBlock.fileId() << " ";
+	// 	}
+    // }
+    // SecondHalfOperations::formatData(formatedData, data);    
+
+    // for (const auto& value : formatedData) {
+    //     std::cerr << value << " ";
+    // } 
 
     std::cerr << "\n";
-    // std::cerr << FirstHalfOperations::calculateCheckSum(formatedData);
-    // Your puzzle answer was .
+    std::cerr << SecondHalfOperations::calculateCheckSum(formatedData);
+    // Your puzzle answer was 6436819084274.
  }
 
+
+// 0 0 .  .  .  1 1 1 .  .  .  2 .  .  .  3 3 3 .  4  4  .  5 5 5 5 .  6 6 6 6 .   7  7  7 .  8 8 8 8 9  9 
+// 0 0 -1 -1 -1 1 1 1 -1 -1 -1 2 -1 -1 -1 3 3 3 -1 4  4  -1 5 5 5 5 -1 6 6 6 6 -1  7  7  7 -1 8 8 8 8 9  9 
+// 0 0  9  9  2 1 1 1  7  7  7 -1 4  4 -1 3 3 3 -1 -1 -1 -1 5 5 5 5 -1 6 6 6 6 -1 -1 -1 -1 -1 8 8 8 8 -1 -1 
+// 0 0  9  9  2 1 1 1  7  7  7 .  4  4 .  3 3 3 .  .  .  .  5 5 5 5 .  6 6 6 6 .  .  .  .  .  8 8 8 8 .  . 
+
 // 7373993044372 to high
+// 6436819084274
 
 //   0 	2333133121414131402 	
 //   1 	.333133121414131402 	0 0 

@@ -48,7 +48,7 @@
 &emsp;• 1st half, 2nd attempt:&emsp; `01h 34m 41s` &emsp; lazy solution :seedling: \
 &emsp;• 2nd half, 1st attempt: &emsp; `01h 55m 40s` &emsp; failed attempt :small_red_triangle_down: \
 &emsp;• 2nd half, 2nd attempt:&emsp; `00h 27m 28s` &emsp; failed attempt :small_red_triangle_down: \
-&emsp;• 2nd half, 3rd attempt:&emsp; `00h 00m 00s` &emsp; :paperclip:
+&emsp;• 2nd half, 3rd attempt:&emsp; `01h 02m 35s` &emsp; lazy solution :seedling:
 
 **Day 10** <sup>:paperclip::paperclip:</sup> `00 : 00 : 00` <sub> \
 &emsp;• prep time: &emsp; `00h 00m 00s` \
