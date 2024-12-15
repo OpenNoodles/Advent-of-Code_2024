@@ -42,7 +42,7 @@
 &emsp;• 1st half: &emsp; `01h 31m 42s` &emsp; lazy solution :seedling: \
 &emsp;• 2nd half: &emsp; `00h 21m 00s` &emsp; lazy solution :seedling:
 
-**Day 09** <sup>:star::paperclip:</sup> `00 : 00 : 00` <sub> \
+**Day 09** <sup>:star::star:</sup> `00 : 00 : 00` <sub> \
 &emsp;• prep time: &emsp; `00h 23m 29s` \
 &emsp;• 1st half, 1st attempt: &emsp; `01h 33m 51s` &emsp; failed attempt :small_red_triangle_down: \
 &emsp;• 1st half, 2nd attempt:&emsp; `01h 34m 41s` &emsp; lazy solution :seedling: \
@@ -50,7 +50,12 @@
 &emsp;• 2nd half, 2nd attempt:&emsp; `00h 27m 28s` &emsp; failed attempt :small_red_triangle_down: \
 &emsp;• 2nd half, 3rd attempt:&emsp; `01h 02m 35s` &emsp; lazy solution :seedling:
 
-**Day 10** <sup>:paperclip::paperclip:</sup> `00 : 00 : 00` <sub> \
+**Day 10** <sup>:star::star:</sup> `00 : 00 : 00` <sub> \
+&emsp;• prep time: &emsp; `00h 16m 36s` \
+&emsp;• 1st half: &emsp; `01h 35m 02s` &emsp; lazy solution :seedling: \
+&emsp;• 2nd half: &emsp; `00h 08m 55s` &emsp; lazy solution :seedling:
+
+**Day 11** <sup>:paperclip::paperclip:</sup> `00 : 00 : 00` <sub> \
 &emsp;• prep time: &emsp; `00h 00m 00s` \
 &emsp;• 1st half: &emsp; `00h 00m 00s` \
 &emsp;• 2nd half: &emsp; `00h 00m 00s`
@@ -60,4 +65,4 @@
 todo - :paperclip: \
 failed attempt - :small_red_triangle_down: \
 lazy solutions - :seedling: \
-post refined solutions - :sunflower: 
+refined solutions - :sunflower: 
