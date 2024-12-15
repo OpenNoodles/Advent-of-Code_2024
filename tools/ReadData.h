@@ -6,6 +6,7 @@
 #include <utility>
 #include <string>
 #include <vector>
+#include <cassert>
 
 namespace ReadData 
 {
@@ -108,6 +109,7 @@ void toMatrix(std::vector<std::vector<DataType>>& vec) {
             row.push_back(value);
         }
         if (!row.empty()) {
+            row.shrink_to_fit();
             vec.push_back(row);
         }
     }

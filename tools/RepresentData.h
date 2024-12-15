@@ -6,6 +6,7 @@
 #include <utility>
 #include <string>
 #include <vector>
+#include <cassert>
 
 namespace RepresentData 
 {
@@ -35,6 +36,28 @@ void toVector(const Section& section, std::vector<std::pair<DataType, DataType>>
     }
 }
 
+template <class DataType>
+void bySplit(const std::vector<std::string>& rawData, std::vector<std::vector<DataType>>& data, const size_t& numberOfCharacters = 1) {
+    assert(numberOfCharacters > 0);
+    for (const auto& line : rawData) {
+        if (line.empty()) {
+            continue;
+        }
+        data.push_back(std::vector<DataType>());
+        size_t index = 0;
+        while (index < line.size()) {
+            std::string tmp;
+            for (size_t i = 0; i < numberOfCharacters; ++i) {
+                tmp += line.at(index);
+                ++index;
+            }
+            std::istringstream stream(tmp);
+            DataType value;
+            stream >> value;
+            data.back().push_back(value);
+        }
+    }
+}
 
 template <class DataType>
 void toVector(const Section& section, std::vector<std::vector<DataType>>& vec, const std::string& delimiter = "") {
