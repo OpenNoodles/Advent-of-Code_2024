@@ -1,33 +1,39 @@
 #!/bin/bash
 
 clear
-
 echo "--- BUILD AND RUN ---"
 echo "  - running 'clear'"
 
-#CURRENT_DIR=$(dirname "$(readlink -f "$0")")
-#echo "  - moving to: '$CURRENT_DIR/'"
-#cd "$CURRENT_DIR" || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
-#if [ ! -d ".build" ]; then
-#    echo "  - missing catalog '.build', creating new catalog"
-#    mkdir .build || { echo "--- can't create catalog, --- BUILD AND RUN ---abort"; echo ""; exit 1; }
-#fi
-#cd .build || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
-#
+# SETUP LOCAL VARIABLES:
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
-echo "  - moving to: '$CURRENT_DIR/..'"
-cd "$CURRENT_DIR/.." || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
-if [ ! -d ".build" ]; then
-    echo "  - missing catalog '.build', creating new catalog..."
-    mkdir .build || { echo "--- can't create catalog, --- BUILD AND RUN ---abort"; echo ""; exit 1; }
+PARENT_DIR=$(dirname "$CURRENT_DIR")
+BUILD_DIR_NAME=".build"
+BUILD_DIR="$PARENT_DIR/$BUILD_DIR_NAME"
+EXECUTABLE_FILE_NAME=$(pwd | awk -F'/' '{print "Aoc-" $(NF-1)}')
+EXECUTABLE_FILE_NAME=${EXECUTABLE_FILE_NAME:0:10}
+echo "  - Parent directory:  '$PARENT_DIR'"
+echo "  - Current directory: '$CURRENT_DIR'"
+echo "  - Build directory:   '$BUILD_DIR'"
+echo "  - Executable name:   '$EXECUTABLE_FILE_NAME'"
+
+# MOVE TO BUILD FOLDER, CREATE IT IF MISSING
+OPERATION_ERROR_LOG="--- Can't create catalog, --- BUILD AND RUN --- abort"
+if [ ! -d "$BUILD_DIR" ]; then
+    echo "  - Missing catalog '$BUILD_DIR_NAME', Creating new catalog..."
+    mkdir "$BUILD_DIR" || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
 fi
-cd .build || { echo "--- can't access directory, --- BUILD AND RUN --- abort"; echo ""; exit 1; }
+echo "  - Moving to: '$BUILD_DIR'"
+OPERATION_ERROR_LOG="--- Can't access directory, --- BUILD AND RUN --- abort"
+cd "$BUILD_DIR" || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
 
-echo "  - running make:"
+# RUN MAKE
+echo "  - Running make:"
 make || { echo "--- BUILD AND RUN --- abort"; exit 1; }
-
-EXECUTABLE_NAME=$(pwd | awk -F'/' '{print "Aoc-" $(NF-1)}')
-echo "  - running executable: '$EXECUTABLE_NAME'"
 echo ""
-../bin/$EXECUTABLE_NAME
+
+# RUN EXECUTABLE
+echo "  - Running executable: '$EXECUTABLE_FILE_NAME'"
+echo ""
+"$CURRENT_DIR/$EXECUTABLE_FILE_NAME" || { echo ""; echo "--- BUILD AND RUN --- abort"; echo ""; exit 1; }
+echo ""
 
