@@ -1,0 +1,56 @@
+#!/bin/bash
+
+echo "--- REBUILD ---"
+
+# SETUP LOCAL VARIABLES:
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+PARENT_DIR=$(dirname "$CURRENT_DIR")
+BUILD_DIR_NAME=".build"
+BUILD_DIR="$PARENT_DIR/$BUILD_DIR_NAME"
+EXECUTABLE_FILE_NAME=$(pwd | awk -F'/' '{print "Aoc-" $(NF-1)}')
+EXECUTABLE_FILE_NAME=${EXECUTABLE_FILE_NAME:0:10}
+echo "  - Parent directory:  '$PARENT_DIR'"
+echo "  - Current directory: '$CURRENT_DIR'"
+echo "  - Build directory:   '$BUILD_DIR'"
+echo "  - Executable name:   '$EXECUTABLE_FILE_NAME'"
+echo ""
+
+# REMOVE PREVIOUS EXECUTABLE
+OPERATION_ERROR_LOG="--- Can't remove existing executable, --- REBUILD --- abort"
+if [ -f "$CURRENT_DIR/$EXECUTABLE_FILE_NAME" ]; then
+    echo "  - Executable already exist. Removing deprecated executable..."
+    rm "$CURRENT_DIR/$EXECUTABLE_FILE_NAME" || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
+    if [ -f "$CURRENT_DIR/$EXECUTABLE_FILE_NAME" ]; then
+        echo "$OPERATION_ERROR_LOG"; echo ""; exit 1
+    else
+        echo "  - Executable removed"
+    fi
+fi
+
+# MOVE TO BUILD FOLDER, CREATE IT IF MISSING
+OPERATION_ERROR_LOG="--- Can't create catalog, --- REBUILD --- abort"
+if [ ! -d "$BUILD_DIR" ]; then
+    echo "  - Missing catalog '$BUILD_DIR_NAME', Creating new catalog..."
+    mkdir "$BUILD_DIR" || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
+fi
+echo "  - Moving to: '$BUILD_DIR'"
+OPERATION_ERROR_LOG="--- Can't access directory, --- REBUILD --- abort"
+cd "$BUILD_DIR" || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
+
+# CLEAR BUILD FOLDER
+RELATIVE_PATH=$(pwd | awk -F'/' '{print ".../" $(NF-2) "/" $(NF-1) "/" $NF}')
+OPERATION_ERROR_LOG="--- Can't remove files from directory, --- REBUILD --- abort"
+echo "  - Removing contents of directory: '$RELATIVE_PATH'"
+rm -rf ./* || { echo "$OPERATION_ERROR_LOG"; echo ""; exit 1; }
+
+# RUN CMAKE
+echo "  - Running cmake:"
+echo ""
+cmake .. || { echo "--- REBUILD --- abort"; echo ""; exit 1; }
+
+# RUN MAKE
+echo ""
+echo "  - Running make:"
+make || { echo "--- REBUILD --- abort"; exit 1; }
+echo ""
+
