@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <list>
 
 namespace ReadData 
 {
@@ -52,6 +53,15 @@ void byLine(Section& section) {
     section.shrink_to_fit();
 }
 
+template <class DataType>
+void toList(std::list<DataType>& list) {
+    auto inputFile = openFile();
+    DataType value;
+    while (inputFile >> value) {
+        list.push_back(value);
+    }
+    inputFile.close();
+}
 
 using Section = std::vector<std::string>;
 using LSections = std::vector<Section>;
