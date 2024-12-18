@@ -9,6 +9,9 @@
 #include <cassert>
 #include <list>
 
+#include "DataStructures.h"
+
+
 namespace ReadData 
 {
 std::ifstream openFile();
@@ -39,8 +42,10 @@ void toVector(std::vector<DataType>& a, std::vector<DataType>& b) {
     inputFile.close();
 }
 
-using Section = std::vector<std::string>;
-void byLine(Section& section) {
+// using Section = std::vector<std::string>;
+
+
+void byLine(std::vector<std::string>& section) {
     auto inputFile = openFile();
     std::string line;
     while (std::getline(inputFile, line)) {
@@ -51,6 +56,10 @@ void byLine(Section& section) {
     }
     inputFile.close();
     section.shrink_to_fit();
+}
+
+void byLine(Lines& data) {
+    byLine(static_cast<std::vector<std::string>&>(data));
 }
 
 template <class DataType>
