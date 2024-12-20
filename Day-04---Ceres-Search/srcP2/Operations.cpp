@@ -1,20 +1,10 @@
-#include "tools/ReadData.h"
+#include "Operations.h"
+
+#include <iostream>
+#include <cassert>
 
 
-void processWordSearch(const std::vector<std::vector<char>>& data);
-
-int processChunk(const std::vector<std::vector<char>>& data, const size_t startX, const size_t startY);
-bool verifyChunkSize(const std::vector<std::vector<char>>& data, const size_t startX, const size_t startY);
-bool checkSlice(const std::string& slice);
-
-int main() {
-    std::vector<std::vector<char>> data;
-    data.reserve(140);
-    ReadData::toMatrix<char>(data);
-    processWordSearch(data);
-    // RESULT: Your puzzle answer was
-    return 0;
-}
+namespace SrcP2 {
 
 void processWordSearch(const std::vector<std::vector<char>>& data) {
     int count = 0;
@@ -71,4 +61,6 @@ bool checkSlice(const std::string& slice) {
         return true;
     }
     return false;
+}
+
 }
