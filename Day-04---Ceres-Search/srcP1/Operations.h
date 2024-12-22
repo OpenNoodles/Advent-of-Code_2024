@@ -1,9 +1,19 @@
 #pragma once
 
+#include "tools/DataStructures.h"
+#include <vector>
+#include <string>
+
 namespace SrcP1 {
 
-void processWordSearch(const std::vector<std::vector<char>>& data);
+void processWordSearch(const VMatrix<char>& data);
 
+int searchHorizontal(const VMatrix<char>& data);
+int searchVertical(const VMatrix<char>& data);
+int searchDiagonalDown(const VMatrix<char>& data);
+int searchDiagonalUp(const VMatrix<char>& data);
+
+void processWordSearch(const std::vector<std::vector<char>>& data);
 int searchHorizontal(const std::vector<std::vector<char>>& data);
 int searchVertical(const std::vector<std::vector<char>>& data);
 int searchDiagonalRight(const std::vector<std::vector<char>>& data);

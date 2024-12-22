@@ -11,6 +11,13 @@ class v_matrix_char {
 public:
 	v_matrix_char();
 
+	const std::vector<std::vector<char>>& data() const;
+	std::vector<std::vector<char>>& data();
+	std::vector<std::vector<char>>::iterator begin();
+	std::vector<std::vector<char>>::iterator end(); 
+	std::vector<std::vector<char>>::const_iterator begin() const;
+	std::vector<std::vector<char>>::const_iterator end() const;
+
 	char value(const size_t x, const size_t y) const;
 	char& value(const size_t x, const size_t y);
 	size_t width(const size_t y = 0) const;

@@ -1,7 +1,12 @@
 #pragma once
 
+#include "tools/DataStructures.h"
+#include <vector>
+#include <string>
+
 namespace SrcP2 {
 
+void processWordSearch(const VMatrix<char>& data);
 
 void processWordSearch(const std::vector<std::vector<char>>& data);
 

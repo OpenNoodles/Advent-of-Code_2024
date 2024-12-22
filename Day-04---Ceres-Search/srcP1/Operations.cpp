@@ -6,6 +6,51 @@
 
 namespace SrcP1 {
 
+void processWordSearch(const VMatrix<char>& data) {
+    int count = 0;
+    count += searchHorizontal(data); // 406
+    count += searchVertical(data); // 424
+    count += searchDiagonalDown(data); // 876
+    count += searchDiagonalUp(data); // 857
+    std::cerr << count << "\n";    
+}
+
+int searchHorizontal(const VMatrix<char>& data) {
+    int count = 0;
+    const auto rows =  data.allRows();
+    for (const auto& slice : rows) {
+        count += countInSlice(slice);
+    }
+    return count;
+}
+
+int searchVertical(const VMatrix<char>& data) {
+    int count = 0;
+    const auto columns =  data.allColumns();
+    for (const auto& slice : columns) {
+        count += countInSlice(slice);
+    }
+    return count;
+}
+
+int searchDiagonalDown(const VMatrix<char>& data) {
+    int count = 0;
+    const auto diagonals =  data.allDiagonalsDown();
+    for (const auto& slice : diagonals) {
+        count += countInSlice(slice);
+    }
+    return count;
+}
+
+int searchDiagonalUp(const VMatrix<char>& data) {
+    int count = 0;
+    const auto diagonals =  data.allDiagonalsUp();
+    for (const auto& slice : diagonals) {
+        count += countInSlice(slice);
+    }
+    return count;
+}
+
 void processWordSearch(const std::vector<std::vector<char>>& data) {
     int count = 0;
     count += searchHorizontal(data); // 406

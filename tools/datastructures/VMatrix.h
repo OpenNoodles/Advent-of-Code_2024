@@ -19,6 +19,25 @@ public:
 		_matrix()
 	{}
 
+	const std::vector<std::vector<char>>& data() const {
+		return _matrix.data();
+	}
+	std::vector<std::vector<char>>& data() {
+		return _matrix.data();
+	}
+	std::vector<std::vector<char>>::iterator begin() {
+		return _matrix.begin();
+	}
+	std::vector<std::vector<char>>::const_iterator begin() const {
+		return _matrix.begin();
+	}
+	std::vector<std::vector<char>>::iterator end() {
+		return _matrix.end();
+	}
+	std::vector<std::vector<char>>::const_iterator end() const {
+		return _matrix.end();
+	}
+
 	char value(const size_t x, const size_t y) const {
 		return _matrix.value(x, y);
 	}

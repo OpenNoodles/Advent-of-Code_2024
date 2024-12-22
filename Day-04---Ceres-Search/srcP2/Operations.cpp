@@ -1,10 +1,19 @@
 #include "Operations.h"
-
 #include <iostream>
 #include <cassert>
 
 
 namespace SrcP2 {
+
+void processWordSearch(const VMatrix<char>& data) {
+    int count = 0;
+    for (size_t x = 0; x < data.width(); ++x) {
+        for (size_t y = 0; y < data.height(); ++y) {
+            count += processChunk(data.data(), x, y);
+        }
+    }
+    std::cerr << count << "\n";
+}
 
 void processWordSearch(const std::vector<std::vector<char>>& data) {
     int count = 0;

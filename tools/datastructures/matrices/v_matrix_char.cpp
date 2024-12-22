@@ -5,6 +5,30 @@ v_matrix_char::v_matrix_char():
 	_data()
 {}
 
+const std::vector<std::vector<char>>& v_matrix_char::data() const {
+	return _data;
+}
+
+std::vector<std::vector<char>>& v_matrix_char::data() {
+	return _data;
+}
+
+std::vector<std::vector<char>>::iterator v_matrix_char::begin() {
+	return _data.begin();
+}
+
+std::vector<std::vector<char>>::const_iterator v_matrix_char::begin() const {
+	return _data.begin();
+}
+
+std::vector<std::vector<char>>::iterator v_matrix_char::end() {
+	return _data.end();
+}
+
+std::vector<std::vector<char>>::const_iterator v_matrix_char::end() const {
+	return _data.end();
+}
+
 char v_matrix_char::value(const size_t x, const size_t y) const {
 	return _data[y][x];
 }
