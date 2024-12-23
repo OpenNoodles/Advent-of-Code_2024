@@ -15,18 +15,6 @@ void processWordSearch(const VMatrix<char>& data) {
     std::cerr << count << "\n";
 }
 
-void processWordSearch(const std::vector<std::vector<char>>& data) {
-    int count = 0;
-    const size_t numberOfRows = data.size();
-    const size_t numberOfColumns = data[0].size();
-    for (size_t x = 0; x < numberOfColumns; ++x) {
-        for (size_t y = 0; y < numberOfRows; ++y) {
-            count += processChunk(data, x, y);
-        }
-    }
-    std::cerr << count << "\n";
-}
-
 int processChunk(const std::vector<std::vector<char>>& data, const size_t startX, const size_t startY) {
     if (!verifyChunkSize(data, startX, startY)) {
         return 0;

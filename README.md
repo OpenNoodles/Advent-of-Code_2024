@@ -15,10 +15,10 @@
 &emsp;• 1st half: &emsp; `00h 40m 28s` &emsp; lazy solution :seedling: \
 &emsp;• 2nd half: &emsp; `00h 16m 08s` &emsp; lazy solution :seedling:
 
-**Day 04** <sup>:star::star:</sup> `02 : 16 : 45` <sub> \
+**Day 04** <sup>:star::star: | :sunflower::sunflower:</sup> `02 : 16 : 45` <sub> \
 &emsp;• prep time: &emsp; `00h 36m 11s` &emsp; \
-&emsp;• 1st half: &emsp; `01h 07m 14s` &emsp; lazy solution :seedling: \
-&emsp;• 2nd half: &emsp; `00h 33m 20s` &emsp; lazy solution :seedling:
+&emsp;• 1st half: &emsp; `01h 07m 14s` &emsp; \
+&emsp;• 2nd half: &emsp; `00h 33m 20s` &emsp;
 
 **Day 05** <sup>:star::star:</sup> `04 : 31 : 22` <sub> \
 &emsp;• prep time: &emsp; `01h 51m 46s` \

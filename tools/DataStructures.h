@@ -4,3 +4,4 @@
 #include "datastructures/Lines.h"
 #include "datastructures/LMatrix.h"
 #include "datastructures/Walker.h"
+#include "datastructures/VMatrix.h"
