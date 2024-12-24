@@ -1,27 +1,10 @@
-#include "tools/ReadData.h"
-#include "tools/RepresentData.h"
+#include "Operations.h"
+
+#include <iostream>
+#include <cassert>
 
 
-void processData(std::vector<std::vector<char>>& mapOfTheSituation);
-void findGuard(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-void markLocation(std::vector<std::vector<char>>& mapOfTheSituation, size_t x, size_t y);
-
-bool moveUp(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveRight(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveDown(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveLeft(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-void show(const std::vector<std::vector<char>>& mapOfTheSituation);
-
-int main() {
-    std::vector<std::string> data;
-    ReadData::byLine(data);
-    std::vector<std::vector<char>> mapOfTheSituation;
-    RepresentData::toVector<char>(data, mapOfTheSituation);
-
-    processData(mapOfTheSituation);
-    // RESULT: Your puzzle answer was 5067
-    return 0;
-}
+namespace SrcP1 {
 
 size_t count = 0;
 
@@ -132,4 +115,6 @@ bool moveLeft(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size
         markLocation(mapOfTheSituation, x, y);
     }
     return (mapOfTheSituation[y][nextX] == '#');
+}
+
 }
