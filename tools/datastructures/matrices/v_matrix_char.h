@@ -4,6 +4,10 @@
 #include <string>
 #include <cassert>
 
+template<typename> class Walker;
+template<typename> class VMatrix;
+template<> class Walker<VMatrix<char>>;
+	
 
 class v_matrix_char {
 	std::vector<std::vector<char>> _data;
@@ -18,6 +22,8 @@ public:
 	std::vector<std::vector<char>>::const_iterator begin() const;
 	std::vector<std::vector<char>>::const_iterator end() const;
 
+	Walker<VMatrix<char>> find(const char v, size_t x = 0, size_t y = 0);
+
 	char value(const size_t x, const size_t y) const;
 	char& value(const size_t x, const size_t y);
 	size_t width(const size_t y = 0) const;
@@ -25,6 +31,7 @@ public:
 	void pushRow(const std::vector<char>& row);
 	void shrinkToFit();
 
+	void show() const;
 	std::string row(const size_t startX, const size_t y) const;
 	std::string column(const size_t x, const size_t startY) const;
 	std::string diagonalDown(size_t x, size_t y) const;

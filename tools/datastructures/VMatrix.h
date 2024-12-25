@@ -1,16 +1,13 @@
 #pragma once
-
-#include <vector>
 #include "Coordinates.h"
-
+#include "Walker.h"
 #include "matrices/v_matrix_char.h"
+#include <vector>
 
 
-template <typename T>
-class VMatrix;
+template<typename> class VMatrix;
 
-
-template <>
+template<>
 class VMatrix<char> {
 	v_matrix_char _matrix;
 	
@@ -37,6 +34,9 @@ public:
 	std::vector<std::vector<char>>::const_iterator end() const {
 		return _matrix.end();
 	}
+	Walker<VMatrix<char>> find(const char v, size_t x = 0, size_t y = 0) {
+		return _matrix.find(v, x, y);
+	}
 
 	char value(const size_t x, const size_t y) const {
 		return _matrix.value(x, y);
@@ -57,6 +57,9 @@ public:
 		_matrix.shrinkToFit();
 	}
 
+	void show() const {
+		_matrix.show();
+	}
 	std::string row(const size_t startX, const size_t y) const {
 		return _matrix.row(startX, y);
 	}

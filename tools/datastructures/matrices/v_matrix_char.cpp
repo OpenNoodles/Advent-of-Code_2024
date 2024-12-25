@@ -1,4 +1,6 @@
 #include "v_matrix_char.h"
+#include "../Walker.h"
+#include <iostream>
 
 
 v_matrix_char::v_matrix_char():
@@ -29,6 +31,18 @@ std::vector<std::vector<char>>::const_iterator v_matrix_char::end() const {
 	return _data.end();
 }
 
+Walker<VMatrix<char>> v_matrix_char::find(const char v, size_t x, size_t y) {
+	for (; y < height(); ++y) {
+		for (; x < width(y); ++x) {
+			if (value(x, y) == v) {
+				return Walker<VMatrix<char>>(this, x, y);
+			}
+		}
+		x = 0;
+	}
+	return Walker<VMatrix<char>>();
+}
+
 char v_matrix_char::value(const size_t x, const size_t y) const {
 	return _data[y][x];
 }
@@ -54,6 +68,17 @@ void v_matrix_char::shrinkToFit() {
 	for (auto& row : _data) {
 		row.shrink_to_fit();
 	}
+}
+
+void v_matrix_char::show() const {
+    for (size_t y = 0; y < height(); ++y) {
+        std::cerr << " " << y << "   ";
+        for (const auto& character : _data[y]) {
+            std::cerr << character;
+        }
+        std::cerr << "\n";
+    }
+    std::cerr << "\n";
 }
 
 std::string v_matrix_char::row(const size_t startX, const size_t y) const {
