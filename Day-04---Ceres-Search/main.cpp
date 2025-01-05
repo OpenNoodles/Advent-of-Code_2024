@@ -1,5 +1,5 @@
-#include "tools/ReadData.h"
-#include "tools/DataStructures.h"
+#include "AdventKit/ReadData.h"
+#include "AdventKit/DataStructures.h"
 #include "srcP1/Operations.h"
 #include "srcP2/Operations.h"
 

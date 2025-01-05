@@ -1,8 +1,9 @@
 #pragma once
 
-#include "tools/DataStructures.h"
+#include "AdventKit/DataStructures.h"
 #include <vector>
 #include <string>
+
 
 namespace SrcP2 {
 void processWordSearch(const VMatrix<char>& data);
