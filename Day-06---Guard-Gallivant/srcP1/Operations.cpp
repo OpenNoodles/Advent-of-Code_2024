@@ -1,5 +1,5 @@
 #include "Operations.h"
-
+#include "tools/DataStructures.h"
 #include <iostream>
 #include <cassert>
 
@@ -8,113 +8,68 @@ namespace SrcP1 {
 
 size_t count = 0;
 
-void processData(std::vector<std::vector<char>>& mapOfTheSituation) {
-    size_t x = 0;
-    size_t y = 0;
-    show(mapOfTheSituation);
-    findGuard(mapOfTheSituation, x, y);
-    show(mapOfTheSituation);
-
-    while (true) {
-        if (!moveUp(mapOfTheSituation, x, y)) {
-            break;
-        }
-        show(mapOfTheSituation);
-        if (!moveRight(mapOfTheSituation, x, y)) {
-            break;
-        }
-        show(mapOfTheSituation);
-        if (!moveDown(mapOfTheSituation, x, y)) {
-            break;
-        }
-        show(mapOfTheSituation);
-        if (!moveLeft(mapOfTheSituation, x, y)) {
-            break;
-        }
-        show(mapOfTheSituation);
+void processData(VMatrix<char>& mapOfTheSituation) {
+    auto walker = mapOfTheSituation.find('^');
+    if (walker.isValid()) {
+        markLocation(walker);
     }
-    show(mapOfTheSituation);
+    while (true) {
+        if (!moveUp(walker)) {
+            break;
+        }
+        if (!moveRight(walker)) {
+            break;
+        }
+        if (!moveDown(walker)) {
+            break;
+        }
+        if (!moveLeft(walker)) {
+            break;
+        }
+    }
     std::cerr << count << "\n";
 }
 
-void show(const std::vector<std::vector<char>>& mapOfTheSituation) {
-    for (size_t i = 0; i < mapOfTheSituation.size(); ++i) {
-        std::cerr << " " << i << "   ";
-        for (const auto& character : mapOfTheSituation[i]) {
-            std::cerr << character;
-        }
-        std::cerr << "\n";
-    }
-    std::cerr << "\n";
-}
-
-void findGuard(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y) {
-    for (; y < mapOfTheSituation.size(); ++y) {
-        for (; x < mapOfTheSituation[y].size(); ++x) {
-            if (mapOfTheSituation[y][x] == '^') {
-                markLocation(mapOfTheSituation, x, y);
-                return;
-            }
-        }
-        x = 0;
-    }
-    throw "No Guard";
-}
-
-void markLocation(std::vector<std::vector<char>>& mapOfTheSituation, size_t x, size_t y) {
-    if (mapOfTheSituation[y][x] == '#') {
+void markLocation(Walker<VMatrix<char>> walker) { //std::vector<std::vector<char>>& mapOfTheSituation, size_t x, size_t y) {
+    if (*walker == '#') {
         throw "Guard's scaled the shelf";
     }
-    if (mapOfTheSituation[y][x] == '.' || mapOfTheSituation[y][x] == '^') {
-        mapOfTheSituation[y][x] = 'X';
+    if (*walker == '.' || *walker == '^') {
+        *walker = 'X';
         ++count;
     }
 }
 
-bool moveUp(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y) {
-    int nextY = static_cast<int>(y) - 1;
-    while (nextY >= 0 && mapOfTheSituation[nextY][x] != '#') {
-        y = nextY;
-        nextY = static_cast<int>(y) - 1;
-        markLocation(mapOfTheSituation, x, y);
+bool moveUp(Walker<VMatrix<char>>& walker) {
+    while (walker.canMoveUp() && walker.checkNextUp() != '#') {
+        walker.moveUp();
+        markLocation(walker);
     }
-    return (mapOfTheSituation[nextY][x] == '#');
+    return walker.canMoveUp();
 }
 
-bool moveRight(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y) {
-    size_t nextX = x + 1;
-    while (nextX < mapOfTheSituation[y].size() && mapOfTheSituation[y][nextX] != '#') {
-        x = nextX;
-        nextX = x + 1;
-        markLocation(mapOfTheSituation, x, y);
+bool moveRight(Walker<VMatrix<char>>& walker) {
+    while (walker.canMoveRight() && walker.checkNextRight() != '#') {
+        walker.moveRight();
+        markLocation(walker);
     }
-    if (nextX >= mapOfTheSituation[y].size()) {
-        return false;
-    }
-    return (mapOfTheSituation[y][nextX] == '#');
+    return walker.canMoveRight();
 }
 
-bool moveDown(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y) {
-    size_t nextY = y + 1;
-    while (nextY < mapOfTheSituation.size() && mapOfTheSituation[nextY][x] != '#') {
-        y = nextY;
-        nextY = y + 1;
-        markLocation(mapOfTheSituation, x, y);
+bool moveDown(Walker<VMatrix<char>>& walker) {
+    while (walker.canMoveDown() && walker.checkNextDown() != '#') {
+        walker.moveDown();
+        markLocation(walker);
     }
-    if (nextY >= mapOfTheSituation.size()) {
-        return false;
-    }
-    return (mapOfTheSituation[nextY][x] == '#');
+    return walker.canMoveDown();
 }
 
-bool moveLeft(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y) {
-    int nextX = static_cast<int>(x) - 1;
-    while (nextX >= 0 && mapOfTheSituation[y][nextX] != '#') {
-        x = nextX;
-        nextX = static_cast<int>(x) - 1;
-        markLocation(mapOfTheSituation, x, y);
+bool moveLeft(Walker<VMatrix<char>>& walker) {
+    while (walker.canMoveLeft() && walker.checkNextLeft() != '#') {
+        walker.moveLeft();
+        markLocation(walker);
     }
-    return (mapOfTheSituation[y][nextX] == '#');
+    return walker.canMoveLeft();
 }
 
 }

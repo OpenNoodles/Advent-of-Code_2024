@@ -1,15 +1,15 @@
 #pragma once
 
+#include "tools/DataStructures.h"
+
 namespace SrcP1 {
 
-void processData(std::vector<std::vector<char>>& mapOfTheSituation);
-void findGuard(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-void markLocation(std::vector<std::vector<char>>& mapOfTheSituation, size_t x, size_t y);
+void processData(VMatrix<char>& mapOfTheSituation);
+void markLocation(Walker<VMatrix<char>> walker);
 
-bool moveUp(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveRight(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveDown(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-bool moveLeft(std::vector<std::vector<char>>& mapOfTheSituation, size_t& x, size_t& y);
-void show(const std::vector<std::vector<char>>& mapOfTheSituation);
+bool moveUp(Walker<VMatrix<char>>& walker);
+bool moveRight(Walker<VMatrix<char>>& walker);
+bool moveDown(Walker<VMatrix<char>>& walker);
+bool moveLeft(Walker<VMatrix<char>>& walker);
 
 }
